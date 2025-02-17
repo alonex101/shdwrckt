@@ -1,0 +1,75 @@
+name: |-
+  Premium Features
+desc: |-
+  Youtube, CamScanner, SpeedTestMaster, TrueCaller, Lightroom
+icon: |-
+  https://github.com/Toperlock/Quantumult/raw/main/icon/Doraemon/Doraemon-1067.png
+
+http:
+
+  mitm:
+    - "*.googlevideo.com"
+    - "youtubei.googleapis.com"
+    - "ap.intsig.net"
+    - "iap.etm.tech"
+    - "premium*.truecaller.com"
+    - "photos.adobe.io"
+
+  url-rewrite:
+    - >-
+      ^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad - reject-200
+
+  script:
+    - match: ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch)
+      name: "Youtube_8"
+      type: response
+      require-body: true
+      max-size: -1
+      binary-mode: true
+      argument: |-
+        {"lyricLang":"vi","captionLang":"vi","blockUpload":true,"blockImmersive":true,"debug":false}
+
+    - match: ^https:\/\/(api|api-cs)\.intsig\.net\/purchase\/cs\/query_property\?
+      name: "CamScanner_9"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 300
+
+    - match: ^https:\/\/iap\.etm\.tech\/receipts
+      name: "SpeedTestMaster_10"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 300
+
+    - match: ^https://premium-(.+)\.truecaller\.com/v\d/(subscriptions|products\/apple)
+      name: "TrueCaller_11"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 300
+
+    - match: ^https:\/\/photos\.adobe\.io\/v2\/accounts*
+      name: "Lightroom_12"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 300
+
+script-providers:
+  "Youtube_8":
+    url: https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/dist/youtube.response.preview.js
+    interval: 86400
+  "CamScanner_9":
+    url: https://github.com/ddgksf2013/dev/raw/main/CamscannerProCrack.js
+    interval: 86400
+  "SpeedTestMaster_10":
+    url: https://raw.githubusercontent.com/lonely0811/olsd/main/speedtest.js
+    interval: 86400
+  "TrueCaller_11":
+    url: https://raw.githubusercontent.com/alonex101/shdwrckt/main/truecaller.js
+    interval: 86400
+  "Lightroom_12":
+    url: https://raw.githubusercontent.com/lonely0811/Surge/main/js/lroom.js
+    interval: 86400
