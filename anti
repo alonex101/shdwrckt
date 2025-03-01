@@ -4,18 +4,16 @@ bypass-system = false
 always-real-ip = *
 
 [Rule]
+RULE-SET,https://raw.githubusercontent.com/alonex101/shdwrckt/refs/heads/patch/anticheat.conf,REJECT
 RULE-SET,https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/ruleset/reject.txt,REJECT
 RULE-SET,https://raw.githubusercontent.com/carrnot/shadowrocket-rules/release/reject.txt,REJECT
 RULE-SET,https://raw.githubusercontent.com/bigdargon/hostsVN/master/option/hostsVN-surge-rule.conf,REJECT
-RULE-SET,https://raw.githubusercontent.com/bigdargon/hostsVN/master/extensions/threat/surge-rule.conf,REJECT
 RULE-SET,https://raw.githubusercontent.com/bigdargon/hostsVN/master/extensions/gambling/surge-rule.conf,REJECT
+RULE-SET,https://raw.githubusercontent.com/bigdargon/hostsVN/master/extensions/threat/surge-rule.conf,REJECT
+RULE-SET,https://raw.githubusercontent.com/bigdargon/hostsVN/master/option/hostsVN-surge-rewrite.conf,REJECT-200
+RULE-SET,https://raw.githubusercontent.com/bigdargon/hostsVN/master/extensions/adult/surge-rule.conf,PROXY
 AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP)),REJECT
 AND,((DOMAIN,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
-DOMAIN-KEYWORD,listdl,REJECT
-DOMAIN-KEYWORD,anticheatexpert,REJECT
-DOMAIN-KEYWORD,prod-lobby,REJECT
-DOMAIN-KEYWORD,tpns.sh,REJECT
-DOMAIN-KEYWORD,tdm.qq,REJECT
 FINAL,DIRECT
 
 [URL Rewrite]
