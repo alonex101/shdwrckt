@@ -1,0 +1,38 @@
+[General]
+# Tác giả @chicagojd
+# https://t.me/chicagojd
+# https://zalo.me/0775983923
+# Gỡ bỏ quảng cáo Youtube, mở khóa một phần Premium các ứng dụng
+# Contribution @app2smile, @ddgksf2013, @loyalsoldier, @maasea, @bigdargon, @carrnot
+
+always-real-ip = *
+bypass-system = false
+
+[Rule]
+RULE-SET,https://cdn.jsdelivr.net/gh/Loyalsoldier/surge-rules@release/ruleset/reject.txt,REJECT
+RULE-SET,https://raw.githubusercontent.com/carrnot/shadowrocket-rules/release/reject.txt,REJECT
+AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP)),REJECT
+AND,((DOMAIN,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
+DOMAIN-KEYWORD,listdl,REJECT
+DOMAIN-KEYWORD,anticheatexpert,REJECT
+DOMAIN-KEYWORD,prod-lobby,REJECT
+DOMAIN-KEYWORD,tpns.sh,REJECT
+DOMAIN-KEYWORD,tdm.qq,REJECT
+FINAL,DIRECT
+
+[URL Rewrite]
+^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad - reject-200
+
+[Script]
+youtube = type=http-response, pattern=^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch), script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js, requires-body=true, binary-body-mode=true, max-size=-1, argument="{"lyricLang":"vi","captionLang":"vi","blockUpload":true,"blockImmersive":true,"debug":false}"
+spotify-json = type=http-request, pattern=^https:\/\/spclient\.wg\.spotify\.com\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/, script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-json.js
+spotify-proto = type=http-response, pattern=^https:\/\/spclient\.wg\.spotify\.com\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$, script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-proto.js, requires-body=true, binary-body-mode=true, max-size=-1, script-update-interval=0
+speed-test-master = type=http-response, pattern=^https:\/\/iap\.etm\.tech\/receipts, script-path=https://raw.githubusercontent.com/lonely0811/olsd/main/speedtest.js, requires-body=true, max-size=-1, timeout=300
+true-caller = type=http-response, pattern=^https://premium-(.+)\.truecaller\.com/v\d/(subscriptions|products\/apple), script-path=https://raw.githubusercontent.com/alonex101/shdwrckt/main/truecaller.js, requires-body=true, max-size=-1, timeout=300
+lightroom = type=http-response, pattern=^https:\/\/photos\.adobe\.io\/v2\/accounts*, script-path=https://raw.githubusercontent.com/lonely0811/Surge/main/js/lroom.js, requires-body=true, max-size=-1, timeout=300
+
+[MITM]
+hostname = *.googlevideo.com, youtubei.googleapis.com, spclient.wg.spotify.com, iap.etm.tech, premium*.truecaller.com, photos.adobe.io
+ca-passphrase = Shadowrocket
+ca-p12 = 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
+enable = true
